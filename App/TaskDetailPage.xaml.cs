@@ -52,7 +52,7 @@ namespace App
                 Task task = Task.Run(async () =>
                 {
                     StringContent name = new StringContent(json);
-                    response = await client.PostAsync(BaseUri, name);
+                    response = await client.PostAsync(apiUri, name);
                 });
                 task.Wait();
             }
