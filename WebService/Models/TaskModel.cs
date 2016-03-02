@@ -17,20 +17,22 @@ namespace WebService.Models
         }
         public static List<TaskDatabaseTable> GetAll()
         {
-            TaskDatabaseTable newTask = new TaskDatabaseTable();
+            List<TaskDatabaseTable> thisList = new List<TaskDatabaseTable>();
 
             foreach (var taskVar in db.TaskDatabaseTable)
             {
+                TaskDatabaseTable newTask = new TaskDatabaseTable();
+
                 newTask.BeginDateTime = taskVar.BeginDateTime;
                 newTask.DeadlineDateTime = taskVar.DeadlineDateTime;
                 newTask.TaskID = taskVar.TaskID;
                 newTask.Title = taskVar.Title;
                 newTask.Requirement = taskVar.Requirement;
 
-                tasks.Add(newTask);
+                thisList.Add(newTask);
             }
 
-            return (tasks);
+            return (thisList);
         }
         public static TaskDatabaseTable GetTask(int id)
         {

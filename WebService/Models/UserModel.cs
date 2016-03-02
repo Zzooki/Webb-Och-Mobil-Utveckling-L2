@@ -19,6 +19,7 @@ namespace WebService.Models
         public static List<User> GetAll()
         {
             User newUser = new User();
+            List<User> thisList = new List<User>();
 
             foreach(var user in db.User)
             {
@@ -26,10 +27,10 @@ namespace WebService.Models
                 newUser.LastName = user.LastName;
                 newUser.UserID = user.UserID;
 
-                users.Add(newUser);
+                thisList.Add(newUser);
             }
 
-            return (users);
+            return (thisList);
         }
         public static User GetUser(int id)
         {

@@ -22,7 +22,7 @@
                         </TextBlock>
                         <TextBlock>
                             <Run FontWeight="Bold">Requirements: </Run>
-                            <Run Text="{Binding Requirements}" />
+                            <Run Text="{Binding Requirement}" />
                         </TextBlock>
                         <TextBlock>
                             <Run FontWeight="Bold">Begin Date: </Run>

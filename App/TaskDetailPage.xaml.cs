@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -34,23 +35,67 @@ namespace App
             }
         }
 
-        private void makeAssignment_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private async void makeAssignment_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             App.userTaskList.Add(activeTask);
 
-            var content = new FormUrlEncodedContent(new[]
+            HttpResponseMessage response = null;
+            AssignmentClass newAssign = new AssignmentClass
             {
-                new KeyValuePair<string, string>("taskid", activeTask.TaskID.ToString()),
-                new KeyValuePair<string, string>("userid", App.activeUser.UserID.ToString())
-            });
+                user = App.activeUser,
+                userTask = activeTask
+            };
+            using (var client = new HttpClient())
+            {
+                string json = JsonConvert.SerializeObject(newAssign);
 
-            using (var Client = new HttpClient())
-            {
                 Task task = Task.Run(async () =>
                 {
-                    await Client.PostAsync(BaseUri, content);
+                    StringContent name = new StringContent(json);
+                    response = await client.PostAsync(BaseUri, name);
                 });
+                task.Wait();
             }
+            if (response.ReasonPhrase.Equals("Not Found"))
+            {
+                var dialog = new MessageDialog("User already assigned to task");
+                await dialog.ShowAsync();
+            }
+            else
+            {
+                this.Frame.Navigate(typeof(MainPage));
+            }
+            this.Frame.Navigate(typeof(MainPage));
+
+            /*HttpResponseMessage response = null;
+
+            Assignment test = new Assignment
+            {
+                TaskID = user.TaskID,
+                UserID = App.user.UserID
+            };
+            using (var client = new HttpClient())
+            {
+                string json = JsonConvert.SerializeObject(test);
+
+                Task task = Task.Run(async () =>
+                {
+                    StringContent till = new StringContent(json);
+                    response = await client.PostAsync(App.BaseUri + "api/Assignments?UserId=" + App.user.UserID + "&TaskID=" + user.TaskID, till);
+                });
+                task.Wait();
+            }
+            if (response.ReasonPhrase.Equals("Not Found"))
+            {
+                var dialog = new MessageDialog("User already assigned to task");
+                await dialog.ShowAsync();
+            }
+            else
+            {
+                this.Frame.Navigate(typeof(MainPage));
+            }
+            this.Frame.Navigate(typeof(MainPage));
+        }*/
 
         }
 
