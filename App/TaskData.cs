@@ -12,6 +12,6 @@ namespace App
         public DateTime BeginDateTime { get; set; }
         public DateTime DeadlineDateTime { get; set; }
         public string Title { get; set; }
-        public string Requirements { get; set; }
+        public string Requirement { get; set; }
     }
 }

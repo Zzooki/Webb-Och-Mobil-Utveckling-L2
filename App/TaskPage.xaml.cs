@@ -28,5 +28,16 @@ namespace App
                 taskList.ItemsSource = list;
             }
         }
+
+        private void taskList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            TaskData selectedItem = taskList.SelectedItem as TaskData;
+
+            if (selectedItem == null)
+            {
+                return;
+            }
+            this.Frame.Navigate(typeof(TaskDetailPage), selectedItem);
+        }
     }
 }

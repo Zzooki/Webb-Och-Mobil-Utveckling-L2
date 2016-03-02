@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 namespace App
 {
@@ -20,12 +21,25 @@ namespace App
             this.InitializeComponent();
         }
 
-        private void button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (e.Parameter is TaskData)
+            {
+                activeTask = (TaskData)e.Parameter;
+                taskID.Text = "Task ID: " + activeTask.TaskID;
+                taskTitle.Text = "Title: " + activeTask.Title;
+                taskBeginDate.Text = "Begin Date" + activeTask.BeginDateTime;
+                taskDeadlineDate.Text = "Deadline: " + activeTask.DeadlineDateTime;
+                taskRequirement.Text = "Requirements: " + activeTask.Requirement;
+            }
+        }
+
+        private void makeAssignment_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
 
         }
 
-        private void button1_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void deleteAssignment_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
 
         }
