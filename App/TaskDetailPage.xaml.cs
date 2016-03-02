@@ -13,7 +13,7 @@ namespace App
     public sealed partial class TaskDetailPage : Page
     {
         private TaskData activeTask = new TaskData();
-        private Uri apiUri = new Uri("http://localhost:19208/api/task");
+        private Uri apiUri = new Uri("http://localhost:19208/api/assignment");
         private HttpClient client = new HttpClient();
 
         public TaskDetailPage()
@@ -36,6 +36,21 @@ namespace App
 
         private void makeAssignment_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
+            App.userTaskList.Add(activeTask);
+
+            var content = new FormUrlEncodedContent(new[]
+            {
+                new KeyValuePair<string, string>("taskid", activeTask.TaskID.ToString()),
+                new KeyValuePair<string, string>("userid", App.activeUser.UserID.ToString())
+            });
+
+            using (var Client = new HttpClient())
+            {
+                Task task = Task.Run(async () =>
+                {
+                    await Client.PostAsync(BaseUri, content);
+                });
+            }
 
         }
 

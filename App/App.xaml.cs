@@ -23,7 +23,7 @@ namespace App
     sealed partial class App : Application
     {
         public static User activeUser { get; set; }
-        public List<TaskData> userTaskList { get; set; }
+        public static List<TaskData> userTaskList = new List<TaskData>();
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
