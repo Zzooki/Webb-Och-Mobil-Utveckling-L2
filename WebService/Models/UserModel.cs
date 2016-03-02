@@ -10,19 +10,19 @@ namespace WebService.Models
     {
         private static DatabasefjortonEntities db = new DatabasefjortonEntities();
         private static List<User> users = new List<User>();
-            
-    
+
+
         public static void CreateUser(User user)
         {
             users.Add(user);
         }
         public static List<User> GetAll()
         {
-            User newUser = new User();
             List<User> thisList = new List<User>();
 
-            foreach(var user in db.User)
+            foreach (var user in db.User)
             {
+                User newUser = new User();
                 newUser.FirstName = user.FirstName;
                 newUser.LastName = user.LastName;
                 newUser.UserID = user.UserID;

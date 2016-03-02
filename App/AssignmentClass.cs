@@ -8,7 +8,7 @@ namespace App
 {
     public class AssignmentClass
     {
-        public User user { get; set; }
-        public TaskData userTask { get; set; }
+        public int userID { get; set; }
+        public int taskID { get; set; }
     }
 }

@@ -42,8 +42,8 @@ namespace App
             HttpResponseMessage response = null;
             AssignmentClass newAssign = new AssignmentClass
             {
-                user = App.activeUser,
-                userTask = activeTask
+                userID = App.activeUser.UserID,
+                taskID = activeTask.TaskID
             };
             using (var client = new HttpClient())
             {
@@ -52,7 +52,7 @@ namespace App
                 Task task = Task.Run(async () =>
                 {
                     StringContent name = new StringContent(json);
-                    response = await client.PostAsync(apiUri, name);
+                    response = await client.PostAsync(apiUri + "?UserID="  + App.activeUser.UserID + " &TaskID=" + activeTask.TaskID, name);
                 });
                 task.Wait();
             }
