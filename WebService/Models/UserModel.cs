@@ -18,11 +18,6 @@ namespace WebService.Models
         }
         public static List<User> GetAll()
         {
-            /*List<Student> _studentRead = new List<Student>();
-
-            _studentRead = (from _student in db2.Students
-                                .Include(r => r.StudentCourses.Select(sc => sc.Course))
-                                select _student).ToList();*/
             User newUser = new User();
 
             foreach(var user in db.User)

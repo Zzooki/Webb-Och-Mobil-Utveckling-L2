@@ -9,6 +9,9 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.TaskID)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.BeginDateTime)
         </th>
         <th>
@@ -20,11 +23,17 @@
         <th>
             @Html.DisplayNameFor(model => model.Requirement)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Assignment)
+        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TaskID)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.BeginDateTime)
         </td>
@@ -38,6 +47,39 @@
             @Html.DisplayFor(modelItem => item.Requirement)
         </td>
         <td>
+            @if (item.Assignment.Count > 0)
+            {
+                foreach (var staff in item.Assignment)
+                {
+                    <table>
+                        <tr>
+                            <th>
+                                <p>Förnamn.</p>
+                            </th>
+                            <td>
+                                @Html.DisplayFor(staffItem => staff.User.FirstName)
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <p>Efternamn:</p>
+                            </th>
+                            <td>
+                                @Html.DisplayFor(staffItem => staff.User.LastName)
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <p>Användarid:</p>
+                            </th>
+                            <td>
+                                @Html.DisplayFor(staffItem => staff.User.UserID)
+                            </td>
+                        </tr>
+                    </table>
+                }
+            }
+            
         </td>
     </tr>
 }
