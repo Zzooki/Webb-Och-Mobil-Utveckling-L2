@@ -19,5 +19,15 @@ namespace App
         {
             this.InitializeComponent();
         }
+
+        private void button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+
+        }
     }
 }

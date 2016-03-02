@@ -24,7 +24,7 @@
             @Html.DisplayNameFor(model => model.Requirement)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Assignment)
+            <p>Staff assigned:</p>
         </th>
         <th></th>
     </tr>
@@ -54,7 +54,7 @@
                     <table>
                         <tr>
                             <th>
-                                <p>Förnamnet på den anställde.</p>
+                                <p>Förnamn:</p>
                             </th>
                             <td>
                                 @Html.DisplayFor(staffItem => staff.User.FirstName)
