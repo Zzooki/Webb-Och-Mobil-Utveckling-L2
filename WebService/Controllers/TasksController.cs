@@ -9,7 +9,7 @@ namespace WebService.Controllers
 {
     public class TasksController : Controller
     {
-        private static DatabasefjortonEntities db = new DatabasefjortonEntities();
+        private static DbtEntities1 db = new DbtEntities1();
         // GET: Tasks
         public ActionResult Index()
         {

@@ -37,7 +37,7 @@ namespace App
 
         private async void makeAssignment_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            App.userTaskList.Add(activeTask);
+            
 
             HttpResponseMessage response = null;
             AssignmentClass newAssign = new AssignmentClass
@@ -58,44 +58,24 @@ namespace App
             }
             if (response.ReasonPhrase.Equals("Not Found"))
             {
-                var dialog = new MessageDialog("User already assigned to task");
+                var dialog = new MessageDialog("Something went wrong!");
                 await dialog.ShowAsync();
             }
             else
             {
-                this.Frame.Navigate(typeof(TaskPage));
-            }
-            this.Frame.Navigate(typeof(TaskPage));
-
-            /*HttpResponseMessage response = null;
-
-            Assignment test = new Assignment
-            {
-                TaskID = user.TaskID,
-                UserID = App.user.UserID
-            };
-            using (var client = new HttpClient())
-            {
-                string json = JsonConvert.SerializeObject(test);
-
-                Task task = Task.Run(async () =>
+                
+                if(response.ReasonPhrase.ToString() == "OK")
                 {
-                    StringContent till = new StringContent(json);
-                    response = await client.PostAsync(App.BaseUri + "api/Assignments?UserId=" + App.user.UserID + "&TaskID=" + user.TaskID, till);
-                });
-                task.Wait();
+                    textBlockResult.Text = "Du är ansvarig för uppgiften";
+                    if (App.userTaskList.Contains(activeTask))
+                    {
+                        return;
+                    }
+                    else
+                        App.userTaskList.Add(activeTask);
+                }
+                
             }
-            if (response.ReasonPhrase.Equals("Not Found"))
-            {
-                var dialog = new MessageDialog("User already assigned to task");
-                await dialog.ShowAsync();
-            }
-            else
-            {
-                this.Frame.Navigate(typeof(MainPage));
-            }
-            this.Frame.Navigate(typeof(MainPage));
-        }*/
 
         }
 
@@ -127,7 +107,7 @@ namespace App
             }
             else
             {
-                this.Frame.Navigate(typeof(TaskPage));
+                textBlockResult.Text = response.ToString();
             }
             this.Frame.Navigate(typeof(TaskPage));
         }

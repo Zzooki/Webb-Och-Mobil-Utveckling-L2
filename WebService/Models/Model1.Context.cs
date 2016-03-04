@@ -13,10 +13,10 @@ namespace WebService.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DatabasefjortonEntities : DbContext
+    public partial class DbtEntities1 : DbContext
     {
-        public DatabasefjortonEntities()
-            : base("name=DatabasefjortonEntities")
+        public DbtEntities1()
+            : base("name=DbtEntities1")
         {
         }
     

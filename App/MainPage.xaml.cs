@@ -71,5 +71,7 @@ namespace App
         {
             Frame.Navigate(typeof(TaskPage));
         }
+
+     
     }
 }

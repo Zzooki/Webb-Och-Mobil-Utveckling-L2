@@ -11,7 +11,7 @@
           </Key>
           <Property Name="TaskID" Type="int" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
-          <Property Name="AssignmentID" Type="int" Nullable="false" />
+          <Property Name="AssignmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="TaskDatabaseTable">
           <Key>
@@ -79,7 +79,7 @@
           </Key>
           <Property Name="TaskID" Type="Int32" Nullable="false" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
-          <Property Name="AssignmentID" Type="Int32" Nullable="false" />
+          <Property Name="AssignmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="User" Relationship="Self.task_fk1" FromRole="Assignment" ToRole="User" />
           <NavigationProperty Name="TaskDatabaseTable" Relationship="Self.task_fk2" FromRole="Assignment" ToRole="TaskDatabaseTable" />
         </EntityType>
@@ -127,7 +127,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DatabasefjortonEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="DbtEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Assignment" EntityType="Self.Assignment" />
           <EntitySet Name="TaskDatabaseTable" EntityType="Self.TaskDatabaseTable" />
           <EntitySet Name="User" EntityType="Self.User" />
@@ -145,7 +145,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DatabasefjortonModelStoreContainer" CdmEntityContainer="DatabasefjortonEntities">
+        <EntityContainerMapping StorageEntityContainer="DatabasefjortonModelStoreContainer" CdmEntityContainer="DbtEntities1">
           <EntitySetMapping Name="Assignment">
             <EntityTypeMapping TypeName="DatabasefjortonModel.Assignment">
               <MappingFragment StoreEntitySet="Assignment">

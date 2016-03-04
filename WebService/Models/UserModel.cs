@@ -8,7 +8,7 @@ namespace WebService.Models
 {
     public class UserModel
     {
-        private static DatabasefjortonEntities db = new DatabasefjortonEntities();
+        private static DbtEntities1 db = new DbtEntities1();
         private static List<User> users = new List<User>();
 
 

@@ -28,6 +28,6 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Button x:Name="button" Content="Task&#xD;&#xA;Page" Height="74" Width="51" Margin="161,214,0,352" Click="button_Click"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,68,0,0" TextWrapping="Wrap" Text="Var god välj en användare:" VerticalAlignment="Top" Width="310" FontSize="24"/>
     </Grid>
 </Page>
