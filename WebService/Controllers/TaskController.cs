@@ -21,22 +21,5 @@ namespace WebService.Controllers
             return TaskModel.GetTask(id);
         }
 
-        public List<TaskDatabaseTable> GetUserTasks(int id)
-        {
-            List<TaskDatabaseTable> userTasks = null;
-            List<Assignment> assignmentList = null;
-
-            foreach (var something in db.Assignment)
-            {
-                if (something.Equals(id))
-                    assignmentList.Add(something);
-            }
-            foreach (var findTask in assignmentList)
-            {
-                userTasks.Add(TaskModel.GetTask(findTask.TaskID));
-            }
-
-            return userTasks;
-        }
     }
 }

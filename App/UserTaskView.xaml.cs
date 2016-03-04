@@ -1,18 +1,34 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Navigation;
+
+// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace App
 {
-    public sealed partial class TaskPage : Page
+    /// <summary>
+    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// </summary>
+    public sealed partial class UserTaskView : Page
     {
-        private static Uri BaseUri = new Uri("http://localhost:19208/api/task");
-        public TaskPage()
+
+        private static Uri BaseUri = new Uri("http://localhost:19208/api/manage");
+
+        public UserTaskView()
         {
             this.InitializeComponent();
 
@@ -28,21 +44,6 @@ namespace App
                 taskList.ItemsSource = list;
             }
         }
-
-        private void taskList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            TaskData selectedItem = taskList.SelectedItem as TaskData;
-
-            if (selectedItem == null)
-            {
-                return;
-            }
-            this.Frame.Navigate(typeof(TaskDetailPage), selectedItem);
-        }
-
-        private void button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(UserTaskView));
-        }
     }
 }
+
