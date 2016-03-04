@@ -41,5 +41,17 @@ namespace WebService.Controllers
 
             return Ok("Du har nu ansvar för uppgiften");
         }
+
+        public IHttpActionResult DeleteAssignment(int userID, int taskID)
+        {
+            Assignment assign = db.Assignment.Find(userID, taskID);
+            if (assign == null)
+            {
+                return NotFound();
+            }
+            db.Assignment.Remove(assign);
+            db.SaveChanges();
+            return Ok("Du har inte längre ansvar för uppgiften");
+        }
     }
 }
