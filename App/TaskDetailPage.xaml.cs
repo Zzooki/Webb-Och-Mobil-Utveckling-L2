@@ -42,8 +42,8 @@ namespace App
             HttpResponseMessage response = null;
             AssignmentClass newAssign = new AssignmentClass
             {
-                user = App.activeUser,
-                userTask = activeTask
+                userID = App.activeUser.UserID,
+                taskID = activeTask.TaskID
             };
             using (var client = new HttpClient())
             {
@@ -52,7 +52,7 @@ namespace App
                 Task task = Task.Run(async () =>
                 {
                     StringContent name = new StringContent(json);
-                    response = await client.PostAsync(apiUri, name);
+                    response = await client.PostAsync(apiUri + "?UserID="  + App.activeUser.UserID + " &TaskID=" + activeTask.TaskID, name);
                 });
                 task.Wait();
             }
@@ -63,9 +63,9 @@ namespace App
             }
             else
             {
-                this.Frame.Navigate(typeof(MainPage));
+                this.Frame.Navigate(typeof(TaskPage));
             }
-            this.Frame.Navigate(typeof(MainPage));
+            this.Frame.Navigate(typeof(TaskPage));
 
             /*HttpResponseMessage response = null;
 
@@ -99,9 +99,37 @@ namespace App
 
         }
 
-        private void deleteAssignment_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private async void deleteAssignment_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
+            App.userTaskList.Remove(activeTask);
 
+            HttpResponseMessage response = null;
+            AssignmentClass newAssign = new AssignmentClass
+            {
+                userID = App.activeUser.UserID,
+                taskID = activeTask.TaskID
+            };
+            using (var client = new HttpClient())
+            {
+                string json = JsonConvert.SerializeObject(newAssign);
+
+                Task task = Task.Run(async () =>
+                {
+                    StringContent name = new StringContent(json);
+                    response = await client.DeleteAsync(apiUri + "?UserID=" + App.activeUser.UserID + " &TaskID=" + activeTask.TaskID);
+                });
+                task.Wait();
+            }
+            if (response.ReasonPhrase.Equals("Not Found"))
+            {
+                var dialog = new MessageDialog("User not assigned to task");
+                await dialog.ShowAsync();
+            }
+            else
+            {
+                this.Frame.Navigate(typeof(TaskPage));
+            }
+            this.Frame.Navigate(typeof(TaskPage));
         }
     }
 }
