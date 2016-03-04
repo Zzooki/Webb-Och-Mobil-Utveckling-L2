@@ -42,7 +42,13 @@ namespace App
                 task.Wait();
                 List<TaskData> list = JsonConvert.DeserializeObject<List<TaskData>>(response);
                 taskList.ItemsSource = list;
+
+                //* När vi får tillbaka svar som är användarens lista, glöm inte att spara den i appen lokalt
+                //Dvs raden nedan ska läggas till:
+                //App.userTaskList = list;
             }
+
+
         }
     }
 }
