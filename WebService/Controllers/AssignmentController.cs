@@ -59,13 +59,21 @@ namespace WebService.Controllers
 
         public IHttpActionResult DeleteAssignment(int userID, int taskID)
         {
-            Assignment assign = db.Assignment.Find(userID, taskID);
+            AssignmentModel amodel = new AssignmentModel();
+            Assignment assign = amodel.GetAssignment(userID, taskID);
+
             if (assign == null)
             {
                 return NotFound();
             }
-            db.Assignment.Remove(assign);
-            db.SaveChanges();
+            try
+            {
+                amodel.RemoveAssignment(assign);
+            }catch(Exception)
+            {
+                return InternalServerError();
+            }
+
             return Ok("Du har inte längre ansvar för uppgiften");
         }
     }

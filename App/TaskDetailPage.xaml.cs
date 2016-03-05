@@ -109,7 +109,7 @@ namespace App
             {
                 textBlockResult.Text = response.ToString();
             }
-            this.Frame.Navigate(typeof(TaskPage));
+            //this.Frame.Navigate(typeof(TaskPage));
         }
     }
 }
