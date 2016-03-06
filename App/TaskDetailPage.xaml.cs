@@ -112,5 +112,10 @@ namespace App
             }
             this.Frame.Navigate(typeof(TaskPage));
         }
+
+        private void back_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(TaskPage));
+        }
     }
 }

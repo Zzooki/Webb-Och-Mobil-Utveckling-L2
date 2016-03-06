@@ -45,5 +45,10 @@ namespace App
         {
             this.Frame.Navigate(typeof(UserTaskView));
         }
+
+        private void back_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MainPage));
+        }
     }
 }

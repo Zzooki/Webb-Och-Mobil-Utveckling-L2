@@ -70,7 +70,10 @@ namespace App
                 //App.userTaskList = list;
             }
 
-
+        private void back_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(TaskPage));
         }
+    }
     }
 
