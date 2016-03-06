@@ -6,15 +6,19 @@ using System.Threading.Tasks;
 
 namespace WebService.Models
 {
+    /// <summary>
+    /// TaskModel class is used for the communication between the user controller,
+    /// and the database.
+    /// </summary>
     class TaskModel
     {
         private static DbtEntities1 db = new DbtEntities1();
-        private static List<TaskDatabaseTable> tasks = new List<TaskDatabaseTable>();
 
-        public static void CreateTask(TaskDatabaseTable task)
-        {
-            tasks.Add(task);
-        }
+        
+        /// <summary>
+        /// GetAll method is used for getting all tasks stored in the database.
+        /// </summary>
+        /// <returns>Returns all the tasks in the database as a list</returns>
         public static List<TaskDatabaseTable> GetAll()
         {
             List<TaskDatabaseTable> thisList = new List<TaskDatabaseTable>();
@@ -34,19 +38,6 @@ namespace WebService.Models
 
             return (thisList);
         }
-        public static TaskDatabaseTable GetTask(int id)
-        {
-            return tasks.Find(uppgift => uppgift.TaskID == id);
-        }
-        public static void UpdateTask(int id, TaskDatabaseTable uppgift)
-        {
-            tasks.Remove(tasks.Find(oldTask => oldTask.TaskID == id));
-            tasks.Add(uppgift);
-        }
-
-        public static void RemoveTask(int id)
-        {
-            tasks.Remove(tasks.Find(uppgift => uppgift.TaskID == id));
-        }
+        
     }
 }

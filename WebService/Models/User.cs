@@ -11,7 +11,9 @@ namespace WebService.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    /// <summary>
+    /// User class representing the table of users within the database
+    /// </summary>
     public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]

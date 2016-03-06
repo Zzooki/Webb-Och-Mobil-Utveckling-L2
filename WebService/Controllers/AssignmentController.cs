@@ -12,20 +12,32 @@ using WebService.Models;
 
 namespace WebService.Controllers
 {
+    /// <summary>
+    /// AssignmentController is a web api controller enabling the app to retrive information regarding the 
+    /// assignments and also manipulate the assignments.
+    /// </summary>
     public class AssignmentController : ApiController
     {
 
         private static DbtEntities1 db = new DbtEntities1();
-
+        /// <summary>
+        /// Get method is used to get all the assignments in the database.
+        /// </summary>
+        /// <returns>Returns aa IEnumerable containing Assignment objects which is all the assignements in the database</returns>
         public IEnumerable<Assignment> Get()
         {
             return AssignmentModel.GetAll();
         }
 
+        /// <summary>
+        /// PostAssignment method is used whenever a user wishes to assign to the task.
+        /// </summary>
+        /// <param name="userID">userID parameter is the userID on the current user which wants to assign to the task</param>
+        /// <param name="taskID">taskID parameter is the task which the user wishes to assign to.</param>
+        /// <returns>Returns a IHttpActionResult which signals if the action was successful or not</returns>
         [ResponseType(typeof(string))]
         public IHttpActionResult PostAssignment(int userID, int taskID)
         {
-            int assignmentOwnedByUser = 0;
 
             if (!ModelState.IsValid)
             {
@@ -36,7 +48,7 @@ namespace WebService.Controllers
             {
                 if (column.UserID == userID && column.TaskID == taskID)
                 {
-                    assignmentOwnedByUser = 1;
+                    ///The Assignment does already exist, no need for further action. I.e no need to adding another row to the database.
                     return Ok();
                 }
                     
@@ -46,9 +58,6 @@ namespace WebService.Controllers
             newAssign.TaskID = taskID;
             db.Assignment.Add(newAssign);
             
-            
-             // Här behöver vi även lägga till tasken i user och user i tasken.
-             //Vi bör även söka i asignment tabellen om den redan vinns innan vi lägger till den.
 
             try
             {
@@ -62,6 +71,12 @@ namespace WebService.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// DeleteAssignment method is used whenever the user does not wish to be assigned to that task
+        /// </summary>
+        /// <param name="userID">userID parameter is the id for the current user which does not want to be assigned to that task</param>
+        /// <param name="taskID">taskID parameter is the id for the task which the user does not want to be assigned to.</param>
+        /// <returns>Returns a IHttpActionResult which signals if the action was successful or not</returns>
         public IHttpActionResult DeleteAssignment(int userID, int taskID)
         {
             Assignment assign = AssignmentModel.GetAssignment(userID, taskID);

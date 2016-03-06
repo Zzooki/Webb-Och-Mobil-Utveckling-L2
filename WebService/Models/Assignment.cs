@@ -11,7 +11,10 @@ namespace WebService.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
+    /// <summary>
+    /// Assignment class representing the table of Assignments within the database
+    /// </summary>
     public partial class Assignment
     {
         public int TaskID { get; set; }

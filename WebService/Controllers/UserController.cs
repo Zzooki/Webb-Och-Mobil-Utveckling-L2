@@ -10,17 +10,19 @@ using WebService.Models;
 
 namespace WebService.Controllers
 {
+    /// <summary>
+    /// UserController is a controller consumed by the application to enable it to get information
+    /// regarding the users.
+    /// </summary>
     public class UserController : ApiController
     {
-        //[System.Web.Http.HttpGet]
+        /// <summary>
+        /// Get method is consumed by the app and is used for getting all available users.
+        /// </summary>
+        /// <returns>Returns a IEnumerable containing User objects which is all the available users</returns>
         public IEnumerable<User> Get()
         {
             return UserModel.GetAll();
         }
-        //[System.Web.Http.HttpGet("{id}")]
-        //public User Get(int id)
-        //{
-        //    return UserModel.GetUser(id);
-        //}
     }
 }

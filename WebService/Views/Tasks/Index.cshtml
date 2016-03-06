@@ -1,4 +1,6 @@
-﻿@model IEnumerable<WebService.Models.TaskDatabaseTable>
+﻿@*This is the html page for the web api representing all tasks in the 
+system and all users assigned to them.*@
+@model IEnumerable<WebService.Models.TaskDatabaseTable>
 
 @{
     ViewBag.Title = "Index";
@@ -54,6 +56,14 @@
                     <table>
                         <tr>
                             <th>
+                                <p>Användarid:</p>
+                            </th>
+                            <td>
+                                @Html.DisplayFor(staffItem => staff.User.UserID)
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
                                 <p>Förnamn:</p>
                             </th>
                             <td>
@@ -66,14 +76,6 @@
                             </th>
                             <td>
                                 @Html.DisplayFor(staffItem => staff.User.LastName)
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                <p>Användarid:</p>
-                            </th>
-                            <td>
-                                @Html.DisplayFor(staffItem => staff.User.UserID)
                             </td>
                         </tr>
                     </table>
