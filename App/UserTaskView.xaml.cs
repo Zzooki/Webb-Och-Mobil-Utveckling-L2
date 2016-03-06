@@ -34,6 +34,8 @@ namespace App
         {
             this.InitializeComponent();
 
+            App.userTaskList = new List<TaskData>();
+
             using (var Client = new HttpClient())
             {
                 var response = "";
