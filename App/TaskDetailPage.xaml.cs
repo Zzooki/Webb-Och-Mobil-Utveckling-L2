@@ -11,17 +11,27 @@ using Windows.UI.Xaml.Navigation;
 
 namespace App
 {
+    /// <summary>
+    /// Sida för att visa detaljerad info om en task.
+    /// </summary>
     public sealed partial class TaskDetailPage : Page
     {
         private TaskData activeTask = new TaskData();
         private Uri apiUri = new Uri("http://localhost:19208/api/assignment");
         private HttpClient client = new HttpClient();
-
+        /// <summary>
+        /// Initiering av sidan.
+        /// </summary>
         public TaskDetailPage()
         {
             this.InitializeComponent();
         }
-
+        /// <summary>
+        /// Denna metod används för att hämta detaljerad information  om en task från webapit och visa den i appen.
+        /// </summary>
+        /// <param name="e">
+        /// Den valda tasken
+        /// </param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             if (e.Parameter is TaskData)
@@ -34,7 +44,11 @@ namespace App
                 taskRequirement.Text = "Requirements: " + activeTask.Requirement;
             }
         }
-
+        /// <summary>
+        /// Metod för att ta ansvar för en task och spara det som en assignment i webapits databas, och lokalt.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void makeAssignment_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             
@@ -69,17 +83,21 @@ namespace App
                     textBlockResult.Text = "Du är ansvarig för uppgiften";
                     if (App.userTaskList.Contains(activeTask))
                     {
-                        this.Frame.Navigate(typeof(TaskPage));
+                        return;
                     }
                     else
                         App.userTaskList.Add(activeTask);
-                        this.Frame.Navigate(typeof(TaskPage));
                 }
                 
             }
 
         }
-
+        /// <summary>
+        /// Metod för att avsäga sig ansvar för en task och ta bort den assignment som är bunden till användaren och
+        /// tasken i webapits databas och den lokala listan med assignment.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void deleteAssignment_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             App.userTaskList.Remove(activeTask);
@@ -108,9 +126,17 @@ namespace App
             }
             else
             {
-                textBlockResult.Text = response.ToString();
+                textBlockResult.Text = "Du har inte längre ansvar för uppgiften";
             }
-            this.Frame.Navigate(typeof(TaskPage));
+        }
+        /// <summary>
+        /// Metod för att gå tillbaka till taskpage.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void back_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(TaskPage));
         }
     }
 }

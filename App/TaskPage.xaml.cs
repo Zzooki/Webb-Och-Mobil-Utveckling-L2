@@ -9,9 +9,15 @@ using Windows.UI.Xaml.Controls;
 
 namespace App
 {
+    /// <summary>
+    /// Sida för att visa samtliga tasks som lagras i webapits databas.
+    /// </summary>
     public sealed partial class TaskPage : Page
     {
         private static Uri BaseUri = new Uri("http://localhost:19208/api/task");
+        /// <summary>
+        /// Initiering av sidan.
+        /// </summary>
         public TaskPage()
         {
             this.InitializeComponent();
@@ -29,7 +35,11 @@ namespace App
                 taskList.ItemsSource = list;
             }
         }
-
+        /// <summary>
+        /// Metod för att navigera till detaljerad vy för den valda tasken.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void taskList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             TaskData selectedItem = taskList.SelectedItem as TaskData;
@@ -40,10 +50,23 @@ namespace App
             }
             this.Frame.Navigate(typeof(TaskDetailPage), selectedItem);
         }
-
+        /// <summary>
+        /// Metod för att visa de tasks som den aktiva användaren har ansvar för.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(UserTaskView));
+        }
+        /// <summary>
+        /// Metod för att gå tillbaka till sidan där man väljer vilken användare man är.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void back_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MainPage));
         }
     }
 }

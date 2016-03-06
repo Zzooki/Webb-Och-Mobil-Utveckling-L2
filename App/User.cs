@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace App
 {
+    /// <summary>
+    /// Klass för att hantera användare i appen.
+    /// </summary>
     public class User
     {
         public int UserID { get; set; }

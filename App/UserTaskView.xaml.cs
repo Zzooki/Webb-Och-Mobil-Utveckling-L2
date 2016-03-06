@@ -21,13 +21,15 @@ using Windows.UI.Xaml.Navigation;
 namespace App
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// Sida för att visa de tasks som den aktiva användaren har ansvar för.
     /// </summary>
     public sealed partial class UserTaskView : Page
     {
 
         private static Uri BaseUri = new Uri("http://localhost:19208/api/task");
-
+        /// <summary>
+        /// Initiering av sidan.
+        /// </summary>
         public UserTaskView()
         {
             this.InitializeComponent();
@@ -55,7 +57,7 @@ namespace App
                     {
                         foreach (var a in aList)
                         {
-                            if (item.TaskID == a.taskID && a.userID == App.activeUser.UserID)
+                            if (item.TaskID == a.taskID && a.userID == App.activeUser.UserID && !App.userTaskList.Contains(item))
                             {
                                 App.userTaskList.Add(item);
                             }
@@ -65,12 +67,32 @@ namespace App
             }
             taskList.ItemsSource = App.userTaskList;
 
-                //* När vi får tillbaka svar som är användarens lista, glöm inte att spara den i appen lokalt
-                //Dvs raden nedan ska läggas till:
-                //App.userTaskList = list;
-            }
-
-
         }
+        /// <summary>
+        /// Metod för att visa detaljerad information om en task, från listan av tasks som den aktiva
+        /// användaren har ansvar för.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void taskList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            TaskData selectedItem = taskList.SelectedItem as TaskData;
+
+            if (selectedItem == null)
+            {
+                return;
+            }
+            this.Frame.Navigate(typeof(TaskDetailPage), selectedItem);
+        }
+        /// <summary>
+        /// Metod för att gå tillbaka till taskpage.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void back_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(TaskPage));
+        }
+    }
     }
 
