@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace App
 {
+    /// <summary>
+    /// Klassen som används för att hantera tasks i appen.
+    /// </summary>
     public class TaskData
     {
         public int TaskID { get; set; }

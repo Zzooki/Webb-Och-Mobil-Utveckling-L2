@@ -21,11 +21,14 @@ using Windows.UI.Xaml.Navigation;
 namespace App
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// Appens första sida. Där användarna som finns i databasen visas och den aktiva användaren väljs.
     /// </summary>
     public sealed partial class MainPage : Page
     {
         public static Uri BaseUri = new Uri("http://localhost:19208/api/user");
+        /// <summary>
+        /// Initiering av första sidan.
+        /// </summary>
         public MainPage()
         {
             this.InitializeComponent();
@@ -59,14 +62,22 @@ namespace App
         {
 
         }
-
+        /// <summary>
+        /// Metod för att lagra den aktiva användaren lokalt i appen.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void userList_SelectionChanged(Object sender, SelectionChangedEventArgs e)
         {
             User activeUser = userList.SelectedItem as User;
             App.activeUser = activeUser;
             this.Frame.Navigate(typeof(TaskPage));
         }
-
+        /// <summary>
+        /// Metod för att gå tillbaka till sidan där samtliga tasks visas.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(TaskPage));

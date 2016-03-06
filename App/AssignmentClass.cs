@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace App
 {
+    /// <summary>
+    /// Klass för att hantera assignments i appen.
+    /// </summary>
     public class AssignmentClass
     {
         public int userID { get; set; }
