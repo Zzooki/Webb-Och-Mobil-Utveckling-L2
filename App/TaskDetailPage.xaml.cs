@@ -83,11 +83,10 @@ namespace App
                     textBlockResult.Text = "Du är ansvarig för uppgiften";
                     if (App.userTaskList.Contains(activeTask))
                     {
-                        this.Frame.Navigate(typeof(TaskPage));
+                        return;
                     }
                     else
                         App.userTaskList.Add(activeTask);
-                        this.Frame.Navigate(typeof(TaskPage));
                 }
                 
             }
@@ -127,9 +126,8 @@ namespace App
             }
             else
             {
-                textBlockResult.Text = response.ToString();
+                textBlockResult.Text = "Du har inte längre ansvar för uppgiften";
             }
-            this.Frame.Navigate(typeof(TaskPage));
         }
         /// <summary>
         /// Metod för att gå tillbaka till taskpage.
