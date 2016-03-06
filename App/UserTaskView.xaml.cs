@@ -57,7 +57,7 @@ namespace App
                     {
                         foreach (var a in aList)
                         {
-                            if (item.TaskID == a.taskID && a.userID == App.activeUser.UserID)
+                            if (item.TaskID == a.taskID && a.userID == App.activeUser.UserID && !App.userTaskList.Contains(item))
                             {
                                 App.userTaskList.Add(item);
                             }
