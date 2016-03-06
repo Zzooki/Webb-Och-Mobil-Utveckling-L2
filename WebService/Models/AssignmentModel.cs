@@ -7,11 +7,11 @@ namespace WebService.Models
 {
     public class AssignmentModel
     {
-        DbtEntities1 db = new DbtEntities1();
+        private static DbtEntities1 db = new DbtEntities1();
         public User user { get; set; }
         public TaskDatabaseTable userTask { get; set; }
 
-        public Assignment GetAssignment(int userID, int taskID)
+        public static Assignment GetAssignment(int userID, int taskID)
         {
             List<Assignment> list = new List<Assignment>();
 
@@ -20,8 +20,22 @@ namespace WebService.Models
 
             return a;
         }
+        public static List<Assignment> GetAll()
+        {
+            List<Assignment> aList = new List<Assignment>();
+            foreach (var item in db.Assignment)
+            {
+                Assignment newAssign = new Assignment();
+                newAssign.AssignmentID = item.AssignmentID;
+                newAssign.TaskID = item.TaskID;
+                newAssign.UserID = item.UserID;
 
-        public void RemoveAssignment(Assignment a)
+                aList.Add(newAssign);
+            }
+            return aList;
+        }
+
+        public static void RemoveAssignment(Assignment a)
         {
             db.Assignment.Remove(a);
             db.SaveChanges();

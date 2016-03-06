@@ -17,6 +17,11 @@ namespace WebService.Controllers
 
         private static DbtEntities1 db = new DbtEntities1();
 
+        public IEnumerable<Assignment> Get()
+        {
+            return AssignmentModel.GetAll();
+        }
+
         [ResponseType(typeof(string))]
         public IHttpActionResult PostAssignment(int userID, int taskID)
         {
@@ -59,8 +64,7 @@ namespace WebService.Controllers
 
         public IHttpActionResult DeleteAssignment(int userID, int taskID)
         {
-            AssignmentModel amodel = new AssignmentModel();
-            Assignment assign = amodel.GetAssignment(userID, taskID);
+            Assignment assign = AssignmentModel.GetAssignment(userID, taskID);
 
             if (assign == null)
             {
@@ -68,7 +72,7 @@ namespace WebService.Controllers
             }
             try
             {
-                amodel.RemoveAssignment(assign);
+                AssignmentModel.RemoveAssignment(assign);
             }catch(Exception)
             {
                 return InternalServerError();

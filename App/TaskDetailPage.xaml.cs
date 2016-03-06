@@ -69,10 +69,11 @@ namespace App
                     textBlockResult.Text = "Du är ansvarig för uppgiften";
                     if (App.userTaskList.Contains(activeTask))
                     {
-                        return;
+                        this.Frame.Navigate(typeof(TaskPage));
                     }
                     else
                         App.userTaskList.Add(activeTask);
+                        this.Frame.Navigate(typeof(TaskPage));
                 }
                 
             }
@@ -109,7 +110,7 @@ namespace App
             {
                 textBlockResult.Text = response.ToString();
             }
-            //this.Frame.Navigate(typeof(TaskPage));
+            this.Frame.Navigate(typeof(TaskPage));
         }
     }
 }

@@ -26,7 +26,7 @@ namespace App
     public sealed partial class UserTaskView : Page
     {
 
-        private static Uri BaseUri = new Uri("http://localhost:19208/api/manage");
+        private static Uri BaseUri = new Uri("http://localhost:19208/api/task");
 
         public UserTaskView()
         {
@@ -41,7 +41,29 @@ namespace App
                 });
                 task.Wait();
                 List<TaskData> list = JsonConvert.DeserializeObject<List<TaskData>>(response);
-                taskList.ItemsSource = list;
+                using (var Client2 = new HttpClient())
+                {
+                    var response2 = "";
+                    Task task2 = Task.Run(async () =>
+                    {
+                        response2 = await Client2.GetStringAsync("http://localhost:19208/api/assignment");
+                    });
+                    task2.Wait();
+                    List<AssignmentClass> aList = JsonConvert.DeserializeObject<List<AssignmentClass>>(response2);
+                    taskList.ItemsSource = aList;
+                    foreach (var item in list)
+                    {
+                        foreach (var a in aList)
+                        {
+                            if (item.TaskID == a.taskID && a.userID == App.activeUser.UserID)
+                            {
+                                App.userTaskList.Add(item);
+                            }
+                        }
+                    }
+                }
+            }
+            taskList.ItemsSource = App.userTaskList;
 
                 //* När vi får tillbaka svar som är användarens lista, glöm inte att spara den i appen lokalt
                 //Dvs raden nedan ska läggas till:
@@ -51,5 +73,4 @@ namespace App
 
         }
     }
-}
 

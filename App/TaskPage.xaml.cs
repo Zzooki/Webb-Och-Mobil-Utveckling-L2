@@ -24,6 +24,7 @@ namespace App
                     response = await Client.GetStringAsync(BaseUri);
                 });
                 task.Wait();
+
                 List<TaskData> list = JsonConvert.DeserializeObject<List<TaskData>>(response);
                 taskList.ItemsSource = list;
             }
